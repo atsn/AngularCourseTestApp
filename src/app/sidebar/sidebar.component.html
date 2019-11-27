@@ -1,7 +1,12 @@
 <aside>
   <nav>
     <div class="list-group">
-      <a *ngFor="let playground of playgrounds" class="list-group-item">
+      <a
+        *ngFor="let playground of playgrounds"
+        class="list-group-item"
+        [class.active]="isactive(playground)"
+        (click)="PlaygroundSelected(playground)"
+      >
         <h4 class="list-group-item-heading">{{ playground.name }}</h4>
         <p class="list-group-item-text">{{ playground.description }}</p>
       </a>

@@ -1,4 +1,11 @@
 <h1>
   {{ title }}
 </h1>
-<app-sidebar></app-sidebar>
+<app-sidebar
+  [playgrounds]="playgrounds"
+  (playground)="selectedPlayground = $event"
+></app-sidebar>
+<app-footer
+  *ngIf="selectedPlayground !== null && selectedPlayground !== undefined"
+  [Playground]="selectedPlayground"
+></app-footer>
