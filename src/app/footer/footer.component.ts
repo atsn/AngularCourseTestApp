@@ -13,4 +13,10 @@ export class FooterComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  getGoogleMapsUrlFromCordinates(Playground: IPlayground) {
+    return `https://www.google.com/maps/place/
+    ${Playground.position.lat.toFixed(6)},
+    ${Playground.position.lng.toFixed(6)}`;
+  }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IPlayground } from '../shared/Iplayground';
-import { MOCK_PLAYGROUNDS } from '../shared/mock-playground';
 
 @Component({
   selector: 'app-sidebar',

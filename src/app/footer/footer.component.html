@@ -2,4 +2,12 @@
   <h3>{{ Playground.name }}</h3>
   <p>{{ Playground.addressDescription }}</p>
   <p>{{ Playground.description }}</p>
+  <p>
+    <a
+      id="PositionLink"
+      [href]="getGoogleMapsUrlFromCordinates(Playground)"
+      target="blank"
+      >{{ Playground.position.lat }},{{ Playground.position.lng }}
+    </a>
+  </p>
 </footer>

@@ -1,8 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { IPlayground } from './shared/Iplayground';
-import { MOCK_PLAYGROUNDS } from './shared/mock-playground';
-import { PlaygroundsPage } from '../../e2e/app.po';
+import { Component, OnInit } from '@angular/core';
 import { GetPlaygroundsService } from './shared/get-playgrounds.service';
+import { IPlayground } from './shared/Iplayground';
+import { map } from 'rxjs/operators';
+import { LocationService } from './shared/location.service';
+import { Center, Marker } from './leaflet';
+import { Observable, merge } from 'rxjs';
+import { marker } from 'leaflet';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,10 +15,24 @@ export class AppComponent implements OnInit {
   public playgrounds: IPlayground[];
   title = 'app works!';
   public selectedPlayground: IPlayground;
+  public center: Center;
+  public Markers$: Observable<Marker>;
 
-  constructor(public getPlaygroundservice: GetPlaygroundsService) {}
+  constructor(
+    public getPlaygroundservice: GetPlaygroundsService,
+    public locationService: LocationService
+  ) {}
 
   ngOnInit() {
-    this.playgrounds = this.getPlaygroundservice.getPlaygrounds();
+    this.getPlaygroundservice
+      .getPlaygrounds()
+      .subscribe(i => (this.playgrounds = i));
+
+    this.Markers$ = this.locationService.current.pipe(
+      map(i => new Marker('MyLocation', i.lat, i.lng))
+    );
+    this.locationService.current.subscribe(
+      i => (this.center = new Center(i.lat, i.lng, 13))
+    );
   }
 }
