@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GetPlaygroundsService } from '.././shared/get-playgrounds.service';
 import { IPlayground } from '.././shared/Iplayground';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, filter, pluck } from 'rxjs/operators';
 import { LocationService } from '.././shared/location.service';
 import { Center, Marker } from '.././leaflet';
 import { Observable, merge } from 'rxjs';
 import { marker } from 'leaflet';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -32,9 +32,9 @@ export class MapComponent implements OnInit {
       .subscribe(i => (this.playgrounds = i));
 
     const SelectedPlaygroundObservable = this.activatedRoute.params.pipe(
-      switchMap(params =>
-        this.getPlaygroundservice.getSelectedPlayground(params['id'])
-      )
+      pluck<Params, string>('id'),
+      filter(id => !!id),
+      switchMap(id => this.getPlaygroundservice.getSelectedPlayground(id))
     );
     SelectedPlaygroundObservable.subscribe(i => {
       this.selectedPlayground = i;
