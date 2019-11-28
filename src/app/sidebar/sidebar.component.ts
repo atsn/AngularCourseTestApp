@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IPlayground } from '../shared/Iplayground';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,18 +9,20 @@ import { IPlayground } from '../shared/Iplayground';
 })
 export class SidebarComponent implements OnInit {
   public active: boolean;
-  private selectedPlayground: IPlayground;
   @Input()
   public playgrounds: IPlayground[];
+  @Input()
+  private selectedPlayground: IPlayground;
   @Output()
   public playground = new EventEmitter<IPlayground>();
 
-  constructor() {}
+  constructor(public router: Router) {}
   ngOnInit() {}
 
   public PlaygroundSelected(playground: IPlayground) {
     this.playground.emit(playground);
     this.selectedPlayground = playground;
+    this.router.navigate([playground.id]);
   }
 
   public isactive(playground: IPlayground): boolean {

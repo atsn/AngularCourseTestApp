@@ -17,4 +17,8 @@ export class GetPlaygroundsService {
   public getPlaygrounds(): Observable<IPlayground[]> {
     return this.request$;
   }
+
+  public getSelectedPlayground(id: string): Observable<IPlayground> {
+    return this.request$.pipe(map(i => i.filter(p => p.id === id).pop()));
+  }
 }

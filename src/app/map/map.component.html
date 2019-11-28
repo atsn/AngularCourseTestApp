@@ -1,0 +1,12 @@
+<app-sidebar
+  [playgrounds]="playgrounds"
+  [selectedPlayground]="selectedPlayground"
+  (playground)="selectedPlayground = $event"
+>
+</app-sidebar>
+<app-footer
+  *ngIf="selectedPlayground !== null && selectedPlayground !== undefined"
+  [Playground]="selectedPlayground"
+>
+</app-footer>
+<leaflet [markers]="Markers$" [center]="center"></leaflet>

@@ -7,10 +7,12 @@ import { FooterComponent } from './footer/footer.component';
 import { GetPlaygroundsService } from './shared/get-playgrounds.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationService } from './shared/location.service';
+import { MapComponent } from './map/map.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, FooterComponent],
-  imports: [BrowserModule, LeafletModule, HttpClientModule],
+  declarations: [AppComponent, SidebarComponent, FooterComponent, MapComponent],
+  imports: [BrowserModule, LeafletModule, HttpClientModule, AppRoutingModule],
   bootstrap: [AppComponent],
   providers: [GetPlaygroundsService, LocationService]
 })
