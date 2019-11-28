@@ -45,7 +45,7 @@ export class MapComponent implements OnInit {
         map(i => new Marker('MyLocation', i.lat, i.lng))
       ),
       SelectedPlaygroundObservable.pipe(
-        map(i => new Marker('MyLocation', i.position.lat, i.position.lng))
+        map(i => new Marker('Playground', i.position.lat, i.position.lng))
       )
     );
     this.locationService.current.subscribe(
