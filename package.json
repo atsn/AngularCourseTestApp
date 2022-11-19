@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/leaflet": "^1.0.56",
-    "@angular-devkit/build-angular": "~0.803.16",
+    "@angular-devkit/build-angular": "~15.0.0",
     "@angular/cli": "~8.3.16",
     "@angular/compiler-cli": "^8.2.13",
     "@angular/language-service": "^8.2.13",
